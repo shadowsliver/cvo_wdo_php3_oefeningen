@@ -1,0 +1,12 @@
+nav{
+    background-color: #CCCCDE;
+    padding-top: 10px;
+}
+
+nav a{
+    display: inline-block;
+    padding: 5px;
+    background-color: #000;
+    font-size: 1.2em;
+    text-decoration: none;
+}
