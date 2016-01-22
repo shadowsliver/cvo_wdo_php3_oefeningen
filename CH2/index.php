@@ -4,6 +4,8 @@ ini_set("display_error", 1);
 
 $pageData = new stdClass();
 
+$pageData = new Page_Data();
+
 $pageData->title = "Portfoliosite";
 $pageData->css = "<link rel='stylesheet' type='text/css' href='css/layout.css'>";
 $pageData->content = "<h1>Mijn Portfolio</h1>";
