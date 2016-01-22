@@ -9,6 +9,7 @@ return "
     </head>
     <body>
         $pageData->content
+        $pageData->embeddedStyle
     </body>
 </html>
 ";
