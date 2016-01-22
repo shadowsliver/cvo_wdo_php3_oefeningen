@@ -7,6 +7,7 @@ include_once 'classes/Page_Data.class.php';
 $pageData = new Page_Data();
 
 $pageData->title = "Building and processing HTML forms with php";
+$pageData->css = "<link rel='stylesheet' type='text/css' href='css/layout.css'>";
 $pageData->content = "<h1>$pageData->title</h1>";
 $pageData->content .= include_once 'views/navigation.php';
 $pageData->content .= include_once 'views/' . $_GET['page'] . '.php';
