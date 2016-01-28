@@ -1,10 +1,10 @@
 <?php
 
 $pages = array(
-    "home", "about"
+    "personalia", "opleidingen", "projecten"
 );
 $pages_name = array(
-    "Home", "About us"
+    "Persoonlijke Gegevens", "Gevolgde Opleidingen", "Gemaakte Projecten"
 );
 
 

@@ -12,7 +12,7 @@
     <?php endforeach; ?>
     
     <?php foreach ($properties->javascript_top as $js) : ?>
-        <script src="<?php echo $style; ?>"></script>
+        <script src="<?php echo $js; ?>"></script>
     <?php endforeach; ?>
 
 </head>
