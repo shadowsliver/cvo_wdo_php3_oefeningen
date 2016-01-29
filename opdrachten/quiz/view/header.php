@@ -1,10 +1,10 @@
 <?php
 
 $pages = array(
-    "home", "opleidingen", "projecten"
+    "home"
 );
 $pages_name = array(
-    "Personalia", "Gevolgde Opleidingen", "Gemaakte Projecten"
+    "Quiz"
 );
 
 
@@ -21,6 +21,9 @@ $pages_name = array(
         </nav>
     </div>
     <div id="header" class="row">
-       <img src="images/logo.png" alt="logo" class="img-responsive"> <span class="greentext">&#60;about&#62;</span> &nbsp;PHP &amp; Java Developer&nbsp;<span class="greentext">&#60;/about&#62;</span>
+      <span class="greentext">Hulp nodig?</span> <form method='get' action='http://www.bing.com/search' target='_blank'>
+            <input type='text' name='q'>
+            <input type='submit' value='Zoeken met Bing'>
+        </form>
     </div>
 </div>
