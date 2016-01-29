@@ -12,10 +12,10 @@ $properties->stylesheets =  array(
     "style.css"
 );
 $properties->javascript_top = array(
-    "js/html5shiv.js", "js/smoothScroll.js"
+    "js/html5shiv.js"
 );
 $properties->javascript_bot = array(
-    "js/jquery.min.js"
+    "js/jquery.min.js", "js/bootstrap.min.js"
 );
 
 if(!empty($_GET['page'])){
