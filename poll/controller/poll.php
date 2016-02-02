@@ -1,7 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Michel
- * Date: 2/02/2016
- * Time: 9:33
- */
+
+include_once 'model/Poll.php';
+$poll = new Poll($db);
+
+$isPollSubmitted = isset($_POST['user-input']);
+if($isPollSubmitted){
+    $input = $_POST['user-inoput'];
+    $poll->updatePoll($input);
+}
+$pollData = $poll->getPollData();
+
+$pollView = include_once "view/poll-html.php";
+
+return $pollView;
