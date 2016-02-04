@@ -1,6 +1,6 @@
 <?php
 
-include_once 'model/Poll.php';
+include_once 'models/Poll.php';
 $poll = new Poll($db);
 
 $isPollSubmitted = isset($_POST['user-input']);
