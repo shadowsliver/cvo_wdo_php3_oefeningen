@@ -1,29 +1,38 @@
 <?php
-error_reporting(E_All);
-ini_set('display_errors', 1);
+/**
+ * Created by PhpStorm.
+ * User: guy
+ * Date: 4/02/16
+ * Time: 10:15
+ */
 
-//models
+include_once 'models/db.php';
+
+
+// Model
 include_once 'models/Page_Data.class.php';
-$pageData = New Page_Data();
-$pageData->title = "PHP/MYSQL blog Demo";
-$pageData->addCSS("css/blog.css");
+$pageData = new Page_Data();
+$pageData->title = "Mijn Blog";
+$pageData->addCss('css/blog.css');
+$pageData->addScript('js/editor.js');
 $pageData->content = "<h1>$pageData->title</h1>";
 
 
-//view
-$pageData .= include_once 'view/admin/admin-navigation.php';
+// View
+$pageData->content .= include_once 'views/admin/admin-navigation.php';
 $navigationIsClicked = isset($_GET['page']);
-if($navigationIsClicked){
+if ($navigationIsClicked) {
     $fileToLoad = $_GET['page'];
-}else{
-    $fileToLoad="entries";
+} else {
+    $fileToLoad = "entries";
 }
-$pageData->content .= include_once "controller/admin/$fileToLoad.php";
-$page = include_once 'view/page.php';
+
+$pageData->content .= include_once "controllers/admin/$fileToLoad.php";
+$page = include_once 'views/page.php';
 
 
 
 
-//models-view
 
+// Model and view
 echo $page;
