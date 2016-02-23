@@ -1,25 +1,36 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: guy
- * Date: 5/02/16
- * Time: 09:44
- */
-include_once 'models/db.php';
-
-// model
-include_once 'models/Page_Data.class.php';
+//complete code for index.php
+error_reporting( E_ALL );
+ini_set( "display_errors", 1 );
+include_once "models/Page_Data.class.php";
 $pageData = new Page_Data();
-$pageData->title = "PHP/MySQL Blog Demo Example";
-$pageData->addCss('css/blog.css');
+$pageData->title = "PHP/MySQL blog demo example";
+$pageData->addCSS("css/blog.css");
+
+$dbInfo = "mysql:host=localhost;dbname=shadow1q_php3simpleblog";
+$dbUser = "shadow1q_php3";
+$dbPassword = "phpcoil101";
+$db = new PDO( $dbInfo, $dbUser, $dbPassword );
+$db->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
 
-$pageData->content = "<h1>$pageData->title</h1>";
-//$pageData->content .= "<h2>All is good</h2>";
-$pageData->content .= include_once 'controllers/blog.php';
+//new code starts here, in line 17 in my index.php
+$pageRequested =  isset( $_GET['page'] );
+//default controller is blog
+$controller = "blog";
+if ( $pageRequested ) {
+    //if user submitted the search form
+    if ( $_GET['page'] === "search" ) {
+        //load the search by overwriting default controller
+        $controller = "search";
+    } 
+}
 
-// view
-$page = include_once 'views/page.php';
+$pageData->content .= include_once "views/search-form-html.php";
+//comment out or delete this line
+//$pageData->content .= include_once "controllers/blog.php";
+$pageData->content .= include_once "controllers/$controller.php";
 
-// model en view
+//end of changes
+$page = include_once "views/page.php";
 echo $page;

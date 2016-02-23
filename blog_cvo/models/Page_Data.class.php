@@ -1,18 +1,19 @@
 <?php
-
+//complete code listing for classes/Page_Data.class.php
 class Page_Data {
-    public $title = '';
-    public $content = '';
-    public $css = '';
-    public $embeddedStyle = '';
-    public $scriptElements = '';
-
-    public function addCss($href) {
-        // niet .= vergeten want meerdere stijlbladen moeten TOEGEVOEGD worden
-        $this->css .= "<link href='$href' rel='stylesheet' >";
+    public $title = "";
+    public $content = "";
+    public $css = "";
+    public $embeddedStyle = "";
+    //declare a new property for script elements
+    public $scriptElements = "";
+    
+    //declare a new method for adding Javascript files
+    public function addScript( $src ){
+        $this->scriptElements .= "<script src='$src'></script>";
     }
-    public function addScript($src){
-        $this->scriptElements .="<script src='$src'></script>";
+    
+    public function addCSS( $href ){
+        $this->css .= "<link href='$href' rel='stylesheet' />";
     }
-
-}
+} 

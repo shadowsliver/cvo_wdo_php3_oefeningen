@@ -1,38 +1,55 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: guy
- * Date: 4/02/16
- * Time: 10:15
- */
+//complete code for blog/admin.php
+error_reporting( E_ALL );
+ini_set( "display_errors", 1 );
 
-include_once 'models/db.php';
-
-
-// Model
-include_once 'models/Page_Data.class.php';
+include_once "models/Page_Data.class.php";
 $pageData = new Page_Data();
-$pageData->title = "Mijn Blog";
-$pageData->addCss('css/blog.css');
-$pageData->addScript('js/editor.js');
-$pageData->content = "<h1>$pageData->title</h1>";
+$pageData->title = "PHP/MySQL blog demo";
+$pageData->addCSS("css/blog.css");
+$pageData->addScript("js/editor.js");
+//$pageData->content = include_once "views/admin/admin-navigation.php";
 
+$dbInfo = "mysql:host=localhost;dbname=shadow1q_php3simpleblog";
+$dbUser = "shadow1q_php3";
+$dbPassword = "phpcoil101";
+$db = new PDO( $dbInfo, $dbUser, $dbPassword );
+$db->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
-// View
-$pageData->content .= include_once 'views/admin/admin-navigation.php';
-$navigationIsClicked = isset($_GET['page']);
-if ($navigationIsClicked) {
-    $fileToLoad = $_GET['page'];
+/*
+$navigationIsClicked = isset( $_GET['page'] );
+if ( $navigationIsClicked ) {
+    //prepare to load corresponding controller
+    $contrl = $_GET['page'];
 } else {
-    $fileToLoad = "entries";
+    //prepare to load default controller
+    $contrl = "entries";
 }
+//load the controller
+$pageData->content .= include_once "controllers/admin/$contrl.php";
+*/
 
-$pageData->content .= include_once "controllers/admin/$fileToLoad.php";
-$page = include_once 'views/page.php';
+include_once "models/Admin_User.class.php";
+$admin = new Admin_User();
+//load the login controller, which will show the login form
+$pageData->content = include_once "controllers/admin/login.php";
+
+//add a new if statement
+//show admin module only if user is logged in
+if( $admin->isLoggedIn() ) {
+    $pageData->content .= include "views/admin/admin-navigation.php";
+    $navigationIsClicked = isset( $_GET['page'] );
+    if ($navigationIsClicked ) {
+        $controller = $_GET['page'];
+    } else {
+        $controller = "entries";
+    }
+    $pathToController = "controllers/admin/$controller.php";    
+    $pageData->content .= include_once $pathToController;
+} //end if-statement
 
 
 
-
-
-// Model and view
+$page = include_once "views/page.php";
 echo $page;
+

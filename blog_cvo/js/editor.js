@@ -1,21 +1,34 @@
-/**
- * Created by guy on 11/02/16.
- */
+//Complete code for js/editor.js
+//declare new function
 function checkTitle (event) {
-    title = document.querySelector("input[name='title']");
+    var title = document.querySelector("input[name='title']");
     var warning = document.querySelector("form #title-warning");
-
-    if(title.value === "") {
+    //if title is empty...
+    if (title.value === "") {
+        //preventDefault, ie don't submit the form
         event.preventDefault();
-        warning.innerHTML="* You must write a title for the entry!";
+        //display a warning
+        warning.innerHTML = "*You must write a title for the entry";
     }
 }
 
-function init(){
-    console.log('Your browser understands DOMContentLoaded');
-    var editorForm = document.querySelector("form#editor ");
-    editorForm.addEventListener("submit", checkTitle, false);
 
+function updateEditorMessage () {
+   var p = document.querySelector("#editor-message");
+    p.innerHTML = "Changes not saved!";
 
 }
+
+
+function init(){
+    console.log("!");
+    var editorForm = document.querySelector("form#editor");
+    var title = document.querySelector("input[name='title']");
+    //this will prevent standard browser treatment of the required attribute
+    title.required = false;
+    title.addEventListener("keyup", updateEditorMessage, false);
+    editorForm.addEventListener("submit", checkTitle, false);
+}
+
+
 document.addEventListener("DOMContentLoaded", init, false);

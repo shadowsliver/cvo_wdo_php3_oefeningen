@@ -1,55 +1,54 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: guy
- * Date: 4/02/16
- * Time: 11:47
- */
+//complete code for controllers/admin/editor.php
+include_once "models/Blog_Entry_Table.class.php";
+$entryTable = new Blog_Entry_Table( $db );
 
-
-// Model
-include_once 'models/Blog_Entry_Table.class.php';
-$entryTable = new Blog_Entry_Table($db);
-
-$editorSubmitted = isset($_POST['action']);
-// als er iets in de waarde zit dus true
-if($editorSubmitted) {
+$editorSubmitted = isset( $_POST['action'] );
+if ( $editorSubmitted ) {
     $buttonClicked = $_POST['action'];
-    $save = ($buttonClicked === 'Save');
+    $save = ( $buttonClicked === 'save' );
     $id = $_POST['id'];
+    $insertNewEntry  = ( $save and $id === '0' );
+    $deleteEntry = ($buttonClicked === 'delete');
+    $updateEntry = ( $save and $insertNewEntry === false );    
     $title = $_POST['title'];
     $entry = $_POST['entry'];
 
-    $insertNewEntry = ($save AND $id === '0');
-    $deleteEntry = ($buttonClicked === 'Delete');
-    $updateEntry = ($save AND $insertNewEntry === false);
+    if ( $insertNewEntry ) {
 
-    if($insertNewEntry) {
-        $savedEntryId = $entryTable->saveEntry($title, $entry);
-    } elseif ($updateEntry) {
-        $entryTable->updateEntry($id, $title, $entry);
+        $savedEntryId = $entryTable->saveEntry( $title, $entry );
+    } else if ( $updateEntry ){
+        $entryTable->updateEntry( $id, $title, $entry );
+    
         $savedEntryId = $id;
-    } elseif ($deleteEntry) {
-        $entryTable->deleteEntry($id);
+    } else if ( $deleteEntry ) {
+        $entryTable->deleteEntry( $id );
     }
+
+
 }
 
-
-
-// View
-$entryRequested = isset($_GET['id']);
-if($entryRequested) {
+$entryRequested = isset( $_GET['id'] );
+if ( $entryRequested ) {
     $id = $_GET['id'];
-    $entryData = $entryTable->getEntry($id);
+    $entryData = $entryTable->getEntry( $id );
     $entryData->entry_id = $id;
+    //new code: show no message when entry is loaded initially
     $entryData->message = "";
 }
-$entrySaved = isset($savedEntryId);
-if($entrySaved){
-    $entryData = $entryTable->getEntry($savedEntryId);
+
+//new code below: an entry was saved or updated
+$entrySaved = isset( $savedEntryId );
+if ( $entrySaved ) {
+    $entryData = $entryTable->getEntry( $savedEntryId );
+    //display a confirmation message
     $entryData->message = "Entry was saved";
 }
-$editorOutput = include_once 'views/admin/editor-html.php';
 
-// View and Model
+
+$editorOutput = include_once "views/admin/editor-html.php";
 return $editorOutput;
+
+
+
+

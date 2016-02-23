@@ -1,14 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: guy
- * Date: 4/02/16
- * Time: 11:12
- */
+//complete code for views/admin/admin-navigation.php
 
 return "
-    <nav id='admin-navigation'>
-    <a href='admin.php?page=entries'>Alle entries</a>
+<nav id='admin-navigation'>
+    <a href='admin.php?page=entries'>All entries</a>
     <a href='admin.php?page=editor'>Editor</a>
-</nav>
-";
+    <a href='admin.php?page=images'>Image manager</a>
+    <a href='admin.php?page=users'>Create admin user</a>
+</nav>";

@@ -1,19 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: guy
- * Date: 5/02/16
- * Time: 10:39
- */
-$entryDataFound = isset($entryData);
-if($entryDataFound === false) {
+//complete source code for views/entry-html.php
+//check if required data is available
+$entryDataFound = isset( $entryData );
+if ( $entryDataFound === false ) {
     trigger_error('views/entry-html.php needs an $entryData object');
 }
-
-return "
-<article>
+//properties available in $entry: entry_id, title, entry_text, date_created
+return "<article>
     <h1>$entryData->entry_title</h1>
-    <div class='data'>$entryData->date_created</div>
-    <p>$entryData->entry_text</p>
-</article>
-";
+    <div class='date'>$entryData->date_created</div>
+    $entryData->entry_text
+</article>";
